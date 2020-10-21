@@ -2,7 +2,7 @@ pipeline {
  
   agent {
     docker {
-      image 'hashicorp/terraform:light'
+      image 'zenika/terraform-azure-cli:latest'
       args '--entrypoint='
     }
   }
