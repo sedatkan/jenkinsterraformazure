@@ -26,8 +26,3 @@ network-subnet-cidr = "10.128.1.0/24"
 web-linux-vm-size        = "Standard_B1s"
 web-linux-admin-username = "tfadmin"
 
-##############
-# Windows VM #
-##############
-web-windows-vm-size        = "Standard_B1s"
-web-windows-admin-username = "tfadmin"
