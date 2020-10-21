@@ -11,6 +11,7 @@ pipeline {
       steps {
         
         sh 'echo started'  
+        sh 'az account get-access-token '
         sh  'terraform init'
         sh  'terraform validate'
         sh  'terraform plan -no-color -out=create.tfplan' 
