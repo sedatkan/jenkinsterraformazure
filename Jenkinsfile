@@ -3,7 +3,7 @@ pipeline {
   agent {
     docker {
       image 'zenika/terraform-azure-cli:latest'
-      args '--entrypoint='     
+      args "--user root --privileged"     
 }
   }
   stages {
