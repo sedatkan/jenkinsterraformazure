@@ -11,7 +11,7 @@ pipeline {
       steps {
         
         sh 'echo started'  
-       
+        sh 'az login  '
         sh  'terraform init'
         sh  'terraform validate'
         sh  'terraform plan -no-color -out=create.tfplan' 
