@@ -11,7 +11,7 @@ pipeline {
       steps {
         
         sh 'echo started'  
-        sh 'az login --service-principal -u  sedatkan@yahoo.com   -p  1p2PgHsgPQn_7rgHjz2r3c94wSKmzu0MSP   --tenant d73fdb28-d3ed-4e01-b2a4-a4682c19d1bd'
+
         sh  'terraform init'
         sh  'terraform validate'
         sh  'terraform plan -no-color -out=create.tfplan' 
