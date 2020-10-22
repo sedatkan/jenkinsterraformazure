@@ -28,7 +28,7 @@ pipeline {
     }  
 
     
-  stage('Approval') {
+  stage('TerraformApply') {
       steps {
         script {
           sh 'terraform apply -input=false create.tfplan'
