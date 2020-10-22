@@ -34,6 +34,7 @@ pipeline {
           sh 'terraform apply -input=false create.tfplan'
       }
     }
+}
 
     stage ('Terraform Destroy') {
       steps{
