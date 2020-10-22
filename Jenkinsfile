@@ -1,30 +1,37 @@
+
 pipeline {
- 
-  agent {
-    docker {
-      image 'zenika/terraform-azure-cli:latest'
-      args '--entrypoint='
-    }
-  }
+
+  agent any
+
+
   stages {
-    stage('Terraform Plan') { 
+
+
+    stage('TF Plan') {
       steps {
-        
-        sh 'echo started'  
-        sh 'az account get-access-token '
-        sh  'terraform init'
-        sh  'terraform validate'
-        sh  'terraform plan -no-color -out=create.tfplan' 
-        sh  'terraform apply --auto-approve'
-        input ('Execute plan')        
-}
+        container('terraform') {
+          sh 'terraform init'
+          sh 'terraform plan -out myplan'
+        }
+      }      
     }
-  
-    stage ('Terraform Destroy') {
-      steps{
-      sh "terraform destroy --auto-approve"
+
+    stage('Approval') {
+      steps {
+        script {
+          def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
+        }
       }
-          
+    }
+
+    stage('TF Apply') {
+      steps {
+        container('terraform') {
+          sh 'terraform apply -input=false myplan'
+        }
       }
-  }
+    }
+
+  } 
+
 }
